@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/GameData.cs" type="Script" id=1]
+
+[node name="GameData" type="Node2D"]
+pause_mode = 2
+scale = Vector2( 3.44, 1 )
+script = ExtResource( 1 )

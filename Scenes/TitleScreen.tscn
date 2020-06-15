@@ -1,0 +1,180 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Misc/Gradients/SkyGradient.tres" type="Texture" id=1]
+[ext_resource path="res://Sprites/Environment/Sun.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Cloud.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/TitleScreen.cs" type="Script" id=4]
+[ext_resource path="res://Sprites/Environment/CC_0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Environment/CC_1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Environment/CC_2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Environment/CC_3.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Environment/DonutQuest.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Cloud4.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Cloud2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Cloud3.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sprites/UI/ControlsDesc.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/UI/Controls.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/UI/Play.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/UI/Controls_Pressed.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/UI/Play_Pressed.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/UI/QuitButton.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/UI/QuitButton_Pressed.png" type="Texture" id=19]
+[ext_resource path="res://Sounds/Sound Effects/ClickSound.wav" type="AudioStream" id=20]
+[ext_resource path="res://Sprites/UI/White.png" type="Texture" id=21]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "BScene"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer1/Darkening:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer1/Text:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 5, 19 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource( 4 )
+clouds1 = ExtResource( 3 )
+clouds2 = ExtResource( 11 )
+clouds3 = ExtResource( 12 )
+clouds4 = ExtResource( 10 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 124.789, 71.9109 )
+rotation = 1.5708
+scale = Vector2( 0.19638, 330.329 )
+texture = ExtResource( 1 )
+
+[node name="Sun" type="Sprite" parent="."]
+position = Vector2( 229.006, 46.5503 )
+texture = ExtResource( 2 )
+
+[node name="Castle" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.509804 )
+position = Vector2( 43.972, 82.1588 )
+frames = SubResource( 1 )
+playing = true
+
+[node name="DonutQuest" type="Sprite" parent="."]
+position = Vector2( 131.393, 22.7363 )
+texture = ExtResource( 9 )
+
+[node name="Cloud" parent="." instance=ExtResource( 3 )]
+position = Vector2( 226.89, 129.201 )
+
+[node name="Cloud2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 26.4706, 132.353 )
+
+[node name="Cloud3" parent="." instance=ExtResource( 11 )]
+position = Vector2( 61.1343, 126.68 )
+
+[node name="Cloud4" parent="." instance=ExtResource( 11 )]
+position = Vector2( 182.773, 137.395 )
+
+[node name="Cloud5" parent="." instance=ExtResource( 12 )]
+position = Vector2( 109.033, 136.134 )
+
+[node name="Cloud6" parent="." instance=ExtResource( 10 )]
+position = Vector2( 146.848, 119.117 )
+
+[node name="Play" type="TextureButton" parent="."]
+margin_left = 170.0
+margin_top = 60.0
+margin_right = 220.0
+margin_bottom = 76.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="TextureButton" parent="."]
+margin_left = 143.721
+margin_top = 78.9793
+margin_right = 263.721
+margin_bottom = 94.9793
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="TextureButton" parent="."]
+margin_left = 164.744
+margin_top = 98.686
+margin_right = 319.744
+margin_bottom = 118.686
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 19 )
+texture_hover = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsBackground" type="Sprite" parent="."]
+visible = false
+position = Vector2( 124.789, 71.9109 )
+rotation = 1.5708
+scale = Vector2( 0.19638, 330.329 )
+texture = ExtResource( 1 )
+
+[node name="ControlsDesc" type="Sprite" parent="."]
+visible = false
+position = Vector2( 128, 75 )
+texture = ExtResource( 13 )
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+
+[node name="StartScene" type="AnimationPlayer" parent="."]
+anims/BScene = SubResource( 2 )
+
+[node name="CanvasLayer1" type="CanvasLayer" parent="."]
+
+[node name="Darkening" type="Sprite" parent="CanvasLayer1"]
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( 138.848, 60 )
+scale = Vector2( 400, 400 )
+texture = ExtResource( 21 )
+
+[node name="Text" type="Label" parent="CanvasLayer1"]
+margin_right = 256.0
+margin_bottom = 150.0
+text = "Remember your mission, soldier! You were sent here in order to retreive the Golden Donut, a donut said to give power to its consumer... and it's actually made of gold! The soldiers we sent before you... well... they failed at their mission. It's up to you to get that donut! Now get ready for deployment in 3.. 2.. 1..."
+autowrap = true
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Play" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="Controls" to="." method="OnControlsPressed"]
+[connection signal="pressed" from="Quit" to="." method="OnQuitButtonPressed"]
+[connection signal="animation_finished" from="StartScene" to="." method="OnAnimationFinished"]

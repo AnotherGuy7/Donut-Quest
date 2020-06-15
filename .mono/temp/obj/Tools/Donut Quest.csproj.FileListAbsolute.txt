@@ -1,0 +1,6 @@
+C:\Users\Jayson\Downloads\Projects- Godot\Donut Quest\.mono\temp\bin\Tools\Donut Quest.dll
+C:\Users\Jayson\Downloads\Projects- Godot\Donut Quest\.mono\temp\bin\Tools\Donut Quest.pdb
+C:\Users\Jayson\Downloads\Projects- Godot\Donut Quest\.mono\temp\obj\Tools\Donut Quest.csprojAssemblyReference.cache
+C:\Users\Jayson\Downloads\Projects- Godot\Donut Quest\.mono\temp\obj\Tools\Donut Quest.csproj.CoreCompileInputs.cache
+C:\Users\Jayson\Downloads\Projects- Godot\Donut Quest\.mono\temp\obj\Tools\Donut Quest.dll
+C:\Users\Jayson\Downloads\Projects- Godot\Donut Quest\.mono\temp\obj\Tools\Donut Quest.pdb

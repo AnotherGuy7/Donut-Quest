@@ -1,0 +1,112 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Sprites/Bosses/Boss1_10.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Bosses/Boss1_09.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Bosses/Boss1_13.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Bosses/Boss1_11.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Bosses/Boss1_06.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Bosses/Boss1_01.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Bosses/Boss1_14.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Bosses/Boss1_05.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Bosses/Boss1_02.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Bosses/Boss1_15.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Bosses/Boss1_07.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Bosses/Boss1_03.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Bosses/Boss1_12.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Bosses/Boss1_00.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Bosses/Boss1_08.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Bosses/Boss1_04.png" type="Texture" id=16]
+[ext_resource path="res://Scripts/AI/Boss1.cs" type="Script" id=17]
+[ext_resource path="res://Scenes/Sprinkle.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Sprites/Bosses/RetractingDonut2.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Bosses/RetractingDonut0.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Bosses/RetractingDonut1.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Bosses/RetractingDonut3.png" type="Texture" id=22]
+[ext_resource path="res://Sounds/Sound Effects/DonutBossShoot.wav" type="AudioStream" id=23]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "Idle_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Walking_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Walking_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "Idle_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "Idle_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "Idle_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "Walking_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Walking_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 19 ), ExtResource( 22 ) ],
+"loop": false,
+"name": "Dying",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 22 ), ExtResource( 22 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 14 ), ExtResource( 14 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "Spawning",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12.6658, 10.8196 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15.0123, 12.9871 )
+
+[node name="Boss1" type="RigidBody2D"]
+mode = 1
+script = ExtResource( 17 )
+sprinkles = ExtResource( 18 )
+
+[node name="BossSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Idle_Front"
+playing = true
+
+[node name="BossShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0.416656, 0.347214 )
+shape = SubResource( 2 )
+
+[node name="SprinklePos" type="Position2D" parent="."]
+position = Vector2( 0, -2.25434 )
+
+[node name="DashHitbox" type="Area2D" parent="."]
+
+[node name="DashShape" type="CollisionShape2D" parent="DashHitbox"]
+position = Vector2( 0.416656, 0.347214 )
+shape = SubResource( 3 )
+
+[node name="SprinkleShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 23 )
+[connection signal="body_entered" from="DashHitbox" to="." method="OnDashHitboxEntered"]
+[connection signal="body_exited" from="DashHitbox" to="." method="OnDashHitboxExited"]
