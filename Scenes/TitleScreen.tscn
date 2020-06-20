@@ -79,6 +79,7 @@ texture = ExtResource( 2 )
 modulate = Color( 1, 1, 1, 0.509804 )
 position = Vector2( 43.972, 82.1588 )
 frames = SubResource( 1 )
+frame = 2
 playing = true
 
 [node name="DonutQuest" type="Sprite" parent="."]

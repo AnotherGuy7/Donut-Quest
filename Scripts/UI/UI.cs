@@ -11,6 +11,9 @@ public class UI : Control
 	private Panel pauseMenu;
 	private Panel donutPanel;
 	private Sprite darkening;
+	private Sprite analogBackground;
+	private Position2D analogCenter;
+	private TouchScreenButton analogButton;
 
 	private float bossMaxHealth = 0f;
 	private float bossHealth = 0f;
@@ -28,6 +31,9 @@ public class UI : Control
 		pauseMenu = (Panel)GetNode("Layer1/PauseMenu");
 		donutPanel = (Panel)GetNode("Layer1/DonutPanel");
 		darkening = (Sprite)GetNode("Layer1/Darkening");
+		analogBackground = (Sprite)GetNode("Layer1/AnalogBackground");
+		analogCenter = (Position2D)GetNode("Layer1/AnalogBackground/Center");
+		analogButton = (TouchScreenButton)GetNode("Layer1/AnalogBackground/Center/Analog");
 	}
 
 	public override void _Process(float delta)
@@ -92,6 +98,17 @@ public class UI : Control
 			deathTimer = 0;
 			darkening.Visible = false;
 		}
+		analogBackground.Visible = OS.GetName() == "Android";
+	}
+
+	private void OnAnalogPressed()
+	{
+		GameData.playerShootVector = analogButton.GlobalPosition - analogCenter.GlobalPosition;
+	}
+
+	private void OnAnalogReleased()
+	{
+		GameData.playerShootVector = Vector2.Zero;
 	}
 
 	private void OnXButtonPressed()

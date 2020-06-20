@@ -15,16 +15,16 @@ colors = PoolColorArray( 0.252914, 0.717402, 0.996094, 1, 0.589844, 0.894257, 1,
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14.1189, 1.92081 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 7.66553, 177.767 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 260.371, 5.17575 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 247.348, 87.5871 )
 
 [node name="OuterCastleMap" type="Node2D"]
@@ -32,9 +32,9 @@ script = ExtResource( 4 )
 donutMen = ExtResource( 3 )
 
 [node name="BackgroundGradient" type="Sprite" parent="."]
-position = Vector2( 241.032, 32.3954 )
+position = Vector2( 238.64, 55.1162 )
 rotation = 4.71239
-scale = Vector2( 0.4, 700 )
+scale = Vector2( 0.422188, 953.516 )
 texture = SubResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -58,7 +58,7 @@ texture = ExtResource( 7 )
 
 [node name="DoorShape" type="CollisionShape2D" parent="Door"]
 position = Vector2( 236.938, 33.431 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="YSort" type="YSort" parent="."]
@@ -109,35 +109,35 @@ position = Vector2( -3.09837, 243.15 )
 
 [node name="Wall1Shape" type="CollisionShape2D" parent="Wall1"]
 position = Vector2( 0, -32.2904 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Wall2" type="StaticBody2D" parent="."]
 position = Vector2( 516.672, 243.15 )
 
 [node name="Wall2Shape" type="CollisionShape2D" parent="Wall2"]
 position = Vector2( 0, -32.2904 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Wall3" type="StaticBody2D" parent="."]
 position = Vector2( 262.1, 382.823 )
 
 [node name="Wall3Shape" type="CollisionShape2D" parent="Wall3"]
 position = Vector2( 0.483612, 7.62939e-06 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Wall4" type="StaticBody2D" parent="."]
 position = Vector2( 261.005, 28.1239 )
 
 [node name="Wall4Shape" type="CollisionShape2D" parent="Wall4"]
 position = Vector2( 0.483612, 7.62939e-06 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="TeleportArea" type="Area2D" parent="."]
 position = Vector2( 254.355, 127.276 )
 
 [node name="TPAreaShape" type="CollisionShape2D" parent="TeleportArea"]
 position = Vector2( 0.483612, 7.62939e-06 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="EnemySpawn1" type="Position2D" parent="."]

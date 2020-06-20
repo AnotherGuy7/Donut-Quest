@@ -21,6 +21,8 @@ public class GameData : Node2D
 
 	private int teleportRegenTimer = 0;
 
+	public static Vector2 playerShootVector;
+
 	public static void HurtPlayer(int damage)
 	{
 		if (damage > playerDefense)

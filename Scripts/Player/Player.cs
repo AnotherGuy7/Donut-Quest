@@ -11,6 +11,7 @@ public class Player : KinematicBody2D
 	private AudioStreamPlayer2D shootSound2;
 	private string direction;
 	private float moveSpeed = 1f;
+	private int shootCool;
 
 	public static Camera2D playerCam;
 	public static Player player;
@@ -73,11 +74,26 @@ public class Player : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
+		if (shootCool > 0)
+		{
+			shootCool--;
+		}
 		if (Input.IsActionJustPressed("attack") && GameData.playerHealth > 0)
 		{
 			Area2D laser = (Area2D)lasers.Instance();
 			laser.GlobalPosition = GlobalPosition;
 			Vector2 projVel = GetGlobalMousePosition() - GlobalPosition;
+			laser.Set("velocity", projVel.Normalized() * 2f);
+			laser.Set("rotation", projVel.Angle());
+			GameData.currentMap.AddChild(laser);
+			shootSound1.Play();
+		}
+		if (GameData.playerShootVector != Vector2.Zero && GameData.playerHealth > 0 && shootCool <= 0)
+		{
+			shootCool += 15;
+			Area2D laser = (Area2D)lasers.Instance();
+			laser.GlobalPosition = GlobalPosition;
+			Vector2 projVel = GameData.playerShootVector;
 			laser.Set("velocity", projVel.Normalized() * 2f);
 			laser.Set("rotation", projVel.Angle());
 			GameData.currentMap.AddChild(laser);
