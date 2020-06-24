@@ -11,14 +11,14 @@ public class UI : Control
 	private Panel pauseMenu;
 	private Panel donutPanel;
 	private Sprite darkening;
-	private Sprite analogBackground;
 	private Position2D analogCenter;
-	private TouchScreenButton analogButton;
+	private Sprite analogSprite;
 
 	private float bossMaxHealth = 0f;
 	private float bossHealth = 0f;
 
 	private float deathTimer = 0;
+	private bool analogHeld = false;
 
 	public override void _Ready()
 	{
@@ -31,9 +31,8 @@ public class UI : Control
 		pauseMenu = (Panel)GetNode("Layer1/PauseMenu");
 		donutPanel = (Panel)GetNode("Layer1/DonutPanel");
 		darkening = (Sprite)GetNode("Layer1/Darkening");
-		analogBackground = (Sprite)GetNode("Layer1/AnalogBackground");
-		analogCenter = (Position2D)GetNode("Layer1/AnalogBackground/Center");
-		analogButton = (TouchScreenButton)GetNode("Layer1/AnalogBackground/Center/Analog");
+		analogCenter = (Position2D)GetNode("Layer1/AnalogButton/Center");
+		analogSprite = (Sprite)GetNode("Layer1/AnalogButton/AnalogSprite");
 	}
 
 	public override void _Process(float delta)
@@ -98,16 +97,26 @@ public class UI : Control
 			deathTimer = 0;
 			darkening.Visible = false;
 		}
-		analogBackground.Visible = OS.GetName() == "Android";
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventScreenDrag drag && analogHeld && (drag.Position - analogCenter.GlobalPosition).Length() <= 30f)
+		{
+			analogSprite.GlobalPosition = drag.Position;
+			GameData.playerShootVector = analogSprite.Position - analogCenter.Position;
+		}
 	}
 
 	private void OnAnalogPressed()
 	{
-		GameData.playerShootVector = analogButton.GlobalPosition - analogCenter.GlobalPosition;
+		analogHeld = true;
 	}
 
 	private void OnAnalogReleased()
 	{
+		analogHeld = false;
+		analogSprite.Position = analogCenter.Position;
 		GameData.playerShootVector = Vector2.Zero;
 	}
 

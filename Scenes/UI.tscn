@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Sprites/UI/HealthBarOutline.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/White.png" type="Texture" id=2]
@@ -24,7 +24,10 @@
 [ext_resource path="res://Sprites/UI/Analog_1.png" type="Texture" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 6 )
+extents = Vector2( 6, 6 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 17.0
 
 [node name="UI" type="Control"]
 pause_mode = 2
@@ -162,68 +165,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PauseMenu" type="Panel" parent="Layer1"]
-visible = false
-margin_right = 8.0
-margin_bottom = 8.0
-
-[node name="PauseMenuGradient" type="Sprite" parent="Layer1/PauseMenu"]
-position = Vector2( 140.665, 123.509 )
-rotation = 1.5708
-scale = Vector2( 0.5, 501.019 )
-texture = ExtResource( 15 )
-
-[node name="Paused" type="Sprite" parent="Layer1/PauseMenu"]
-position = Vector2( 127.165, 17.3647 )
-texture = ExtResource( 10 )
-
-[node name="Continue" type="TextureButton" parent="Layer1/PauseMenu"]
-pause_mode = 2
-margin_left = 70.1112
-margin_top = 65.7601
-margin_right = 185.111
-margin_bottom = 85.7601
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 14 )
-texture_hover = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackToMenu" type="TextureButton" parent="Layer1/PauseMenu"]
-pause_mode = 2
-margin_left = 59.0
-margin_top = 93.0193
-margin_right = 214.0
-margin_bottom = 113.019
-texture_normal = ExtResource( 13 )
-texture_pressed = ExtResource( 11 )
-texture_hover = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Damage" type="Label" parent="Layer1/PauseMenu"]
-margin_top = 125.509
-margin_right = 56.0
-margin_bottom = 139.509
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Damage:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Defence" type="Label" parent="Layer1/PauseMenu"]
-margin_left = 149.653
-margin_top = 125.509
-margin_right = 206.653
-margin_bottom = 139.509
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Defence:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DonutPanel" type="Panel" parent="Layer1"]
 visible = false
 margin_right = 8.0
@@ -295,19 +236,13 @@ margin_bottom = 54.746
 texture_normal = ExtResource( 20 )
 texture_pressed = ExtResource( 20 )
 
-[node name="Darkening" type="Sprite" parent="Layer1"]
-visible = false
-modulate = Color( 0, 0, 0, 0 )
-position = Vector2( 147.698, 76.8171 )
-scale = Vector2( 363.437, 169.998 )
-texture = ExtResource( 2 )
-
 [node name="UpButton" type="TouchScreenButton" parent="Layer1"]
 position = Vector2( 28, 94 )
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 21 )
 pressed = ExtResource( 21 )
 shape = SubResource( 1 )
+passby_press = true
 action = "move_up"
 visibility_mode = 1
 
@@ -318,7 +253,8 @@ scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 21 )
 pressed = ExtResource( 21 )
 shape = SubResource( 1 )
-action = "move_up"
+passby_press = true
+action = "move_left"
 visibility_mode = 1
 
 [node name="RightButton" type="TouchScreenButton" parent="Layer1"]
@@ -328,7 +264,8 @@ scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 21 )
 pressed = ExtResource( 21 )
 shape = SubResource( 1 )
-action = "move_up"
+passby_press = true
+action = "move_right"
 visibility_mode = 1
 
 [node name="DownButton" type="TouchScreenButton" parent="Layer1"]
@@ -338,30 +275,99 @@ scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 21 )
 pressed = ExtResource( 21 )
 shape = SubResource( 1 )
-action = "move_up"
+passby_press = true
+action = "move_down"
 visibility_mode = 1
 
-[node name="AnalogBackground" type="Sprite" parent="Layer1"]
+[node name="AnalogButton" type="TouchScreenButton" parent="Layer1"]
 self_modulate = Color( 1, 1, 1, 0.384314 )
-position = Vector2( 223.598, 122.615 )
-scale = Vector2( 2, 2 )
+position = Vector2( 197.735, 92.4829 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 22 )
+shape = SubResource( 2 )
+passby_press = true
+
+[node name="Center" type="Position2D" parent="Layer1/AnalogButton"]
+position = Vector2( 8, 8 )
+
+[node name="AnalogSprite" type="Sprite" parent="Layer1/AnalogButton"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 22 )
 
-[node name="Center" type="Position2D" parent="Layer1/AnalogBackground"]
+[node name="PauseMenu" type="Panel" parent="Layer1"]
+visible = false
+margin_right = 8.0
+margin_bottom = 8.0
 
-[node name="Analog" type="TouchScreenButton" parent="Layer1/AnalogBackground/Center"]
-position = Vector2( -2, -2 )
-scale = Vector2( 0.3, 0.3 )
-normal = ExtResource( 22 )
-pressed = ExtResource( 22 )
-shape = SubResource( 1 )
-action = "move_up"
-visibility_mode = 1
+[node name="PauseMenuGradient" type="Sprite" parent="Layer1/PauseMenu"]
+position = Vector2( 140.665, 123.509 )
+rotation = 1.5708
+scale = Vector2( 0.5, 501.019 )
+texture = ExtResource( 15 )
+
+[node name="Paused" type="Sprite" parent="Layer1/PauseMenu"]
+position = Vector2( 127.165, 17.3647 )
+texture = ExtResource( 10 )
+
+[node name="Continue" type="TextureButton" parent="Layer1/PauseMenu"]
+pause_mode = 2
+margin_left = 70.1112
+margin_top = 65.7601
+margin_right = 185.111
+margin_bottom = 85.7601
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToMenu" type="TextureButton" parent="Layer1/PauseMenu"]
+pause_mode = 2
+margin_left = 59.0
+margin_top = 93.0193
+margin_right = 214.0
+margin_bottom = 113.019
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Damage" type="Label" parent="Layer1/PauseMenu"]
+margin_top = 125.509
+margin_right = 56.0
+margin_bottom = 139.509
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Damage:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defence" type="Label" parent="Layer1/PauseMenu"]
+margin_left = 149.653
+margin_top = 125.509
+margin_right = 206.653
+margin_bottom = 139.509
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Defence:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Darkening" type="Sprite" parent="Layer1"]
+visible = false
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( 147.698, 76.8171 )
+scale = Vector2( 363.437, 169.998 )
+texture = ExtResource( 2 )
 
 [node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 19 )
+[connection signal="pressed" from="Layer1/DonutPanel/XButton" to="." method="OnXButtonPressed"]
+[connection signal="pressed" from="Layer1/AnalogButton" to="." method="OnAnalogPressed"]
+[connection signal="released" from="Layer1/AnalogButton" to="." method="OnAnalogReleased"]
 [connection signal="pressed" from="Layer1/PauseMenu/Continue" to="." method="OnContinuePressed"]
 [connection signal="pressed" from="Layer1/PauseMenu/BackToMenu" to="." method="OnBackToMenuPressed"]
-[connection signal="pressed" from="Layer1/DonutPanel/XButton" to="." method="OnXButtonPressed"]
-[connection signal="pressed" from="Layer1/AnalogBackground/Center/Analog" to="." method="OnAnalogPressed"]
-[connection signal="released" from="Layer1/AnalogBackground/Center/Analog" to="." method="OnAnalogReleased"]

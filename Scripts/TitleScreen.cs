@@ -23,6 +23,7 @@ public class TitleScreen : Node2D
 	private TextureButton controls;
 	private TextureButton quit;
 	private AnimationPlayer startScene;
+	private TouchScreenButton controlsQuit;
 	private int pressTimer = 0;
 
 	public override void _Ready()
@@ -33,6 +34,7 @@ public class TitleScreen : Node2D
 		controls = (TextureButton)GetNode("Controls");
 		quit = (TextureButton)GetNode("Quit");
 		startScene = (AnimationPlayer)GetNode("StartScene");
+		controlsQuit = (TouchScreenButton)GetNode("ControlsBack");
 		GameData.currentMap = this;
 	}
 
@@ -77,8 +79,10 @@ public class TitleScreen : Node2D
 				play.Disabled = false;
 				controls.Disabled = false;
 				quit.Disabled = false;
+				controlsQuit.Visible = false;
 			}
 		}
+
 		GameData.playerMaxHealth = 100;		//Resetting variables
 		GameData.playerHealth = 100;
 		GameData.playerDamage = 2;
@@ -115,5 +119,16 @@ public class TitleScreen : Node2D
 		play.Disabled = true;
 		controls.Disabled = true;
 		quit.Disabled = true;
+		controlsQuit.Visible = true;
+	}
+	
+	private void OnControlsBackPressed()
+	{
+		controlsDesc.Visible = false;
+		secondSkyGradient.Visible = false;
+		play.Disabled = false;
+		controls.Disabled = false;
+		quit.Disabled = false;
+		controlsQuit.Visible = false;
 	}
 }
